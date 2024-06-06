@@ -13,6 +13,7 @@ file3 = ROOT.TFile("/home/perez/Downloads/combined_Amp_3.root")
 # Espera entrada del usuario
 Amp = input("What amplifier do you want to analyze? (2/3): ")
 
+
 while True:
     if Amp == "2":
         file = file2
@@ -160,6 +161,7 @@ for i in range(len(hot_columns)):
             f"The column {hot_columns[i]} its:{sigma_hot_columns[i]} sigmas away from the mean. Decide yourself if it is a hot column.\n")
 print("Number of hot columns: ", len(hot_columns))
 
+'''
 # Crear un archivo de texto
 # Obtener la ruta del directorio actual
 current_directory = os.path.dirname(os.path.abspath(__file__))
@@ -174,6 +176,24 @@ with open(file_name, "w") as file:
         hot_column_str = str(hot_columns[i]).ljust(12)
         sigma_str = str(sigma_hot_columns[i])
         file.write(hot_column_str + sigma_str + "\n")
+
+# Imprimir mensaje de confirmación
+print(f"Se ha creado el archivo '{file_name}' con éxito.")
+'''
+
+# Crear un archivo de texto con todas las columnas y su sigma
+# Obtener la ruta del directorio actual
+current_directory = os.path.dirname(os.path.abspath(__file__))
+file_name = os.path.join(current_directory, "all_columns_sigma.txt")
+with open(file_name, "w") as file:
+    # Encabezado
+    file.write("Column".ljust(12) + "Sigma\n")
+
+    # Escribir los datos de todas las columnas y sus sigmas
+    for i in range(histx.GetNbinsX()):
+        column_str = str(i).ljust(12)
+        sigma_str = str((histx.GetBinContent(i) - p0 - p1*i)/tstd_value)
+        file.write(column_str + sigma_str + "\n")
 
 # Imprimir mensaje de confirmación
 print(f"Se ha creado el archivo '{file_name}' con éxito.")
@@ -270,5 +290,8 @@ legend.Draw()
 
 
 input("Presiona Enter para continuar...")  # Espera entrada del usuario
+
+histogram3 = ROOT.TH1F("Histogram Amplifier 3","Pixels in columns with no seed",3100,0.5,3100.5)
+file3.clustersRec.Draw("pixels_x>>Histogram Amplifier 3","!has_seed")
 
 '''
