@@ -1,0 +1,201 @@
+<!--Translation of LEACH sequencer for LTA-->
+<!--super_sequencer_Paolo_Aug2020.waveforms-->
+<!--Paolo_HighVoltage_UW1611S.ini-->
+<!--clocking to register 2,side L-->
+
+<variables>
+    <!--clock definitions-->
+    <state name="V1L"  val="000000000000000000000000000001"/>
+    <state name="V3U"  val="000000000000000000000000000010"/>  <!--1U por 3U para dividir-->
+    <state name="V2"   val="000000000000000000000000000100"/>  
+    <state name="V3L"  val="000000000000000000000000001000"/>  
+    <state name="V1U"  val="000000000000000000000000010000"/>  <!--3U por 1U para dividir-->
+    <state name="H1L"  val="000000000000000000000000100000"/>  <!--1L por 3L para dividir-->
+    <state name="H3U"  val="000000000000000000000001000000"/>  
+    <state name="H2"   val="000000000000000000000010000000"/>
+    <state name="H3L"  val="000000000000000000000100000000"/>  <!--3L por 1L para dividir-->
+    <state name="H1U"  val="000000000000000000001000000000"/>
+    <state name="SW1"  val="000000000000000000010000000000"/>
+    <state name="SW2"  val="000000000000000000100000000000"/>
+    <state name="RG1"  val="000000000000000001000000000000"/>
+    <state name="RG2"  val="000000000000000010000000000000"/>
+    <state name="OG1"  val="000000000000000100000000000000"/>
+    <state name="OG2"  val="000000000000001000000000000000"/>
+    <state name="DG1"  val="000000000000010000000000000000"/>
+    <state name="DG2"  val="000000000000100000000000000000"/>
+    <state name="TG1"  val="000000000001000000000000000000"/>
+    <state name="TG2"  val="000000000010000000000000000000"/>
+    <state name="EC1"  val="000000001000000000000000000000"/>
+    <state name="EC2"  val="000000010000000000000000000000"/>
+    <state name="EC3"  val="000000100000000000000000000000"/>
+    <state name="EC4"  val="000001000000000000000000000000"/>
+    <state name="IT1"  val="000010000000000000000000000000"/>
+    <state name="IT2"  val="000100000000000000000000000000"/>
+
+ 
+    <!--state definitions-->
+	<!--val="V1L | V1U | V2 | V3L | V3U | H1L | H1U | H2C | H3L | H3U | SW1 | SW2 | RG1 | RG2 | OG1 | OG2 | DG1 | DG2 | TG1 | TG2 | IT1 | IT2"-->
+
+    <!--vertical clocks-->
+    <state name="STATE_V1"   val="V1L | V1U |      V3L | V3U | H1L | H1U |      H3L | H3U |             RG1 | RG2 | OG1 | OG2 | DG1 | DG2 |       TG2 "/>
+    <state name="STATE_V2"   val="                 V3L | V3U | H1L | H1U |      H3L | H3U |             RG1 | RG2 | OG1 | OG2 | DG1 | DG2 |       TG2 "/>
+    <state name="STATE_V3"   val="            V2 | V3L | V3U | H1L | H1U |      H3L | H3U |             RG1 | RG2 | OG1 | OG2 | DG1 | DG2 |       TG2 "/>
+    <state name="STATE_V4"   val="            V2 |             H1L | H1U |      H3L | H3U |             RG1 | RG2 | OG1 | OG2 | DG1 | DG2 |       TG2 "/>
+    <state name="STATE_V5"   val="V1L | V1U | V2 |             H1L | H1U |      H3L | H3U |             RG1 | RG2 | OG1 | OG2 | DG1 | DG2 |       TG2 "/>
+    <state name="STATE_V6"   val="V1L | V1U |                  H1L | H1U |      H3L | H3U |             RG1 | RG2 | OG1 | OG2 | DG1 | DG2 |       TG2 "/>
+    <state name="STATE_V7"   val="V1L | V1U |      V3L | V3U | H1L | H1U |      H3L | H3U |             RG1 | RG2 | OG1 | OG2 | DG1 | DG2 | TG1 | TG2 "/>
+
+
+    <!--horizontal clocks-->
+    <state name="STATE_H1"   val="V1L | V1U |      V3L | V3U | H1L | H1U |      H3L | H3U |             RG1 | RG2 | OG1 | OG2 | DG1 | DG2 | TG1 | TG2 "/>
+    <state name="STATE_H2"   val="V1L | V1U |      V3L | V3U | H1L | H1U |                              RG1 | RG2 | OG1 | OG2 | DG1 | DG2 | TG1 | TG2 "/>
+    <state name="STATE_H3"   val="V1L | V1U |      V3L | V3U | H1L | H1U | H2 |                         RG1 | RG2 | OG1 | OG2 | DG1 | DG2 | TG1 | TG2 "/>
+    <state name="STATE_H4"   val="V1L | V1U |      V3L | V3U |             H2 |                         RG1 | RG2 | OG1 | OG2 | DG1 | DG2 | TG1 | TG2 "/>
+    <state name="STATE_H5"   val="V1L | V1U |      V3L | V3U |             H2 | H3L | H3U |                         OG1 | OG2 | DG1 | DG2 | TG1 | TG2 "/>
+    <state name="STATE_H6"   val="V1L | V1U |      V3L | V3U |                  H3L | H3U |                         OG1 | OG2 | DG1 | DG2 | TG1 | TG2 "/>
+    <state name="STATE_H7"   val="V1L | V1U |      V3L | V3U | H1L | H1U |      H3L | H3U |                         OG1 | OG2 | DG1 | DG2 | TG1 | TG2 "/>
+
+    <!--skipper-->
+    <state name="STATE_S1"   val="V1L | V1U |      V3L | V3U | H1L | H1U |      H3L | H3U |                         OG1 | OG2 | DG1 | DG2 | TG1 | TG2            "/>
+    <state name="STATE_S2"   val="V1L | V1U |      V3L | V3U | H1L | H1U |      H3L | H3U |             RG1 | RG2 | OG1 | OG2 | DG1 | DG2 | TG1 | TG2            "/>
+    <state name="STATE_S3"   val="V1L | V1U |      V3L | V3U | H1L | H1U |      H3L | H3U |             RG1 | RG2 | OG1 | OG2 | DG1 | DG2 | TG1 | TG2            "/>
+    <state name="STATE_S3M"  val="V1L | V1U |      V3L | V3U | H1L | H1U |      H3L | H3U |             RG1 | RG2 | OG1 | OG2 | DG1 | DG2 | TG1 | TG2 | IT1      "/>
+    <state name="STATE_S4"   val="V1L | V1U |      V3L | V3U | H1L | H1U |      H3L | H3U | SW1 | SW2 | RG1 | RG2 | OG1 | OG2 | DG1 | DG2 | TG1 | TG2            "/>
+    <state name="STATE_S5"   val="V1L | V1U |      V3L | V3U | H1L | H1U |      H3L | H3U |             RG1 | RG2 | OG1 | OG2 | DG1 | DG2 | TG1 | TG2            "/>
+    <state name="STATE_S5M"  val="V1L | V1U |      V3L | V3U | H1L | H1U |      H3L | H3U |             RG1 | RG2 | OG1 | OG2 | DG1 | DG2 | TG1 | TG2 |       IT2 "/>
+    <state name="STATE_S6"   val="V1L | V1U |      V3L | V3U | H1L | H1U |      H3L | H3U |             RG1 | RG2 |             DG1 | DG2 | TG1 | TG2  "/>
+    <state name="STATE_S7"   val="V1L | V1U |      V3L | V3U | H1L | H1U |      H3L | H3U |             RG1 | RG2 | OG1 | OG2 | DG1 | DG2 | TG1 | TG2  "/>
+ 
+    <!--dump charge-->
+    <state name="STATE_D1"   val="V1L | V1U |      V3L | V3U | H1L | H1U |      H3L | H3U | SW1 | SW2 | RG1 | RG2 | OG1 | OG2 | DG1 | DG2 | TG1 | TG2  "/>
+    <state name="STATE_D2"   val="V1L | V1U |      V3L | V3U | H1L | H1U |      H3L | H3U |             RG1 | RG2 | OG1 | OG2 | DG1 | DG2 | TG1 | TG2  "/>
+    <state name="STATE_D3"   val="V1L | V1U |      V3L | V3U | H1L | H1U |      H3L | H3U |             RG1 | RG2 | OG1 | OG2 |             TG1 | TG2  "/>
+    <state name="STATE_D4"   val="V1L | V1U |      V3L | V3U | H1L | H1U |      H3L | H3U |             RG1 | RG2 | OG1 | OG2 | DG1 | DG2 | TG1 | TG2  "/>
+
+    <!--CCD parameters-->
+    <var name="NROW"     val="20"/>
+    <var name="NCOL"     val="300"/>
+
+    <var name="NBINROW"  val="4"/>
+	<var name="NBINCOL"  val="4"/>
+
+    <var name="SKIPROW"  val="0"/>
+	<var name="SKIPCOL" val="0"/>
+    
+	<var name="NSAMP"    val="1"/>
+
+
+    <var name="CCDNPRES" val="8"/>
+    <var name="CCDNROW"  val="1537"/>
+	<var name="CCDNCOL"  val="6144"/>
+
+	<var name="EXPOSURE"  val="0"/>
+	<!-- Do not remove the next two lines-->
+	<var name="TOG_VDD"   val="0"/>
+	<var name="TOG_VR"    val="0"/>
+
+    <!--clock delays--> 
+    <var name="delay_V"                 val="350"/>  <!--P_DELAY-->
+    <var name="delay_H_clean"           val="15"/>  <!--S_DELAY-->
+    <var name="delay_H"                 val="150"/>    <!--S_DELAY-->
+    <var name="delay_SW"                val="7"/>    <!--SW_DELAY-->
+    <var name="delay_RG_width"          val="4"/>    <!--SkippingRGWidth-->
+    <var name="delay_PedInt_width"      val="35"/>   <!--PedestalIntgWait-->
+    <var name="delay_PedADC_width"      val="157"/>   <!--IntegralTime-->
+    <var name="delay_SigInt_width"      val="157"/>   <!--SignalIntgWait-->
+    <var name="delay_SigADC_width"      val="157"/>   <!--IntegralTime-->
+    <var name="delay_SW_width"          val="4"/>    <!--SWPulseWidth-->
+    <var name="delay_OG_width"          val="4"/>    <!--OGWidth-->
+	<var name="delay_DG_width"          val="4"/>    <!--DGWidth-->
+    <var name="delay_expose"            val="15000000"/><!--one second-->
+</variables>
+
+<dynamicVariables>
+    <var name="x" vals="NSAMP"/>
+</dynamicVariables>
+
+<!--horizontal_step has large delays because sequencer seems to have problems with a short recipe in the innermost loop-->
+<recipes>
+    <recipe name="hold">
+        <step state="STATE_V7"   delay="delay_V"/>
+    </recipe>
+	
+	<recipe name="expose">
+        <step state="STATE_V7"   delay="delay_expose"/>
+    </recipe>
+	
+	<recipe name="vertical">
+        <step state="STATE_V1"   delay="delay_V"/>
+        <step state="STATE_V2"   delay="delay_V"/>
+        <step state="STATE_V3"   delay="delay_V"/>
+        <step state="STATE_V4"   delay="delay_V"/>
+        <step state="STATE_V5"   delay="delay_V"/>
+        <step state="STATE_V6"   delay="delay_V"/>
+        <step state="STATE_V7"   delay="delay_V"/>
+	</recipe>
+
+	<recipe name="drain">
+        <step state="STATE_D1"   delay="delay_SW_width"/>
+        <step state="STATE_D2"   delay="delay_SW"/>
+        <step state="STATE_D3"   delay="delay_DG_width"/>
+        <step state="STATE_D4"   delay="delay_SW"/>
+    </recipe>
+
+    <recipe name="horizontal">
+        <step state="STATE_H1"   delay="delay_H"/>
+        <step state="STATE_H2"   delay="delay_H"/>
+        <step state="STATE_H3"   delay="delay_H"/>
+        <step state="STATE_H4"   delay="delay_H"/>
+        <step state="STATE_H5"   delay="delay_H"/>
+        <step state="STATE_H6"   delay="delay_H"/>
+        <step state="STATE_H7"   delay="delay_H"/>
+    </recipe>
+	
+    <recipe name="horizontal_clean">
+        <step state="STATE_H1"   delay="delay_H_clean"/>
+        <step state="STATE_H2"   delay="delay_H_clean"/>
+        <step state="STATE_H3"   delay="delay_H_clean"/>
+        <step state="STATE_H4"   delay="delay_H_clean"/>
+        <step state="STATE_H5"   delay="delay_H_clean"/>
+        <step state="STATE_H6"   delay="delay_H_clean"/>
+        <step state="STATE_H7"   delay="delay_H_clean"/>
+	</recipe>
+
+    <recipe name="skipper">
+        <step state="STATE_S1"   delay="delay_RG_width"/>
+        <step state="STATE_S2"   delay="delay_SW"/>
+        <step state="STATE_S3"   delay="delay_PedInt_width"/>
+        <step state="STATE_S3M"  delay="delay_PedADC_width"/>
+        <step state="STATE_S4"   delay="delay_SW_width"/>
+        <step state="STATE_S5"   delay="delay_SigInt_width"/>
+        <step state="STATE_S5M"  delay="delay_SigADC_width"/>
+        <step state="STATE_S6"   delay="delay_OG_width"/>
+        <step state="STATE_S7"   delay="delay_SW"/>
+    </recipe>
+
+</recipes>
+
+<sequence>
+	<!-- Clean the CCD -->
+	<recipe name="hold" n="400">
+		<recipe name="vertical" n="4"/>
+		<recipe name="drain" n="1600">
+			<recipe name="horizontal_clean" n="4"/>
+		</recipe>
+	</recipe>
+
+	<!-- Expose the CCD -->
+	<recipe name="expose" n="EXPOSURE"/>
+	
+	<!-- Read Image from CCD -->
+	<!-- vertical binning -->
+	<recipe name="hold" n="NROW">
+		<recipe name="vertical" n="NBINROW"/>
+		<!-- horizontal binning -->
+		<recipe name="drain" n="NCOL">
+			<recipe name="horizontal" n="NBINCOL"/>
+			<!-- Read pixel value -->
+			<recipe name="skipper" n="NSAMP" ncluster="NCOL, NROW"/>
+		</recipe>
+	</recipe>
+</sequence>
