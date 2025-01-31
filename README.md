@@ -1,5 +1,6 @@
-Welcome to the repository, here you will encounter all the codes used for the development of my thesis
+Welcome to my TFM repository. Here, you will find all the code used for the development of my Master's Final Project (TFM)
 - **TFM_Daniel_Perez_Chamorro.pdf**: The complete TFM document
+- **TFM_Defense_Presentation.pptx**: The slides used in the defense of the TFM
 - **/scripts/**: Contains all scripts used
     - **`clean_expose_binned.xml`**: This file is the sequencer, where we can change the clock delays and decide where to send the charge.
     - **`run_variables.sh`**: In this file, we can change the number of skips, CDS integration times, exposure time, bias voltage, and the dimensions of the CCD that will be read.
